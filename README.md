@@ -91,14 +91,73 @@ For the `subql-starter` project, you can try to query with the following code to
 
 ```graphql
 query {
-  transfers(first: 5, orderBy: BLOCK_HEIGHT_ASC) {
+  claims(first: 5, orderBy: VALUE_DESC) {
+    nodes {
+      blockHeight
+      value
+      blockHeight
+      blockTimestamp
+      account
+    }
+  }
+  dailyClaimSummaries(first: 5) {
     nodes {
       id
-      blockHeight
-      from
-      to
-      value
-      contractAddress
+      totalClaimed
+      claims(first: 5) {
+        totalCount
+        nodes {
+          id
+          account
+          value
+        }
+      }
+    }
+  }
+}
+```
+
+```json
+{
+  "data": {
+    "claims": {
+      "nodes": [
+        {
+          "blockHeight": "100322581",
+          "value": "7477664852469040021504",
+          "blockTimestamp": "1684714980",
+          "account": "0x85399353400C5B67fD6eE53B1d2cd183bAE7dDdb"
+        },
+        {
+          "blockHeight": "100316590",
+          "value": "1746193727981909180416",
+          "blockTimestamp": "1684711341",
+          "account": "0xfa4d3CD41555d3A0FafD4A97e9ba91882A2f4755"
+        }
+      ]
+    },
+    "dailyClaimSummaries": {
+      "nodes": [
+        {
+          "id": "2023-05-21",
+          "totalClaimed": "9223858580450949201920",
+          "claims": {
+            "totalCount": 2,
+            "nodes": [
+              {
+                "id": "247333",
+                "account": "0xfa4d3CD41555d3A0FafD4A97e9ba91882A2f4755",
+                "value": "1746193727981909180416"
+              },
+              {
+                "id": "129721",
+                "account": "0x85399353400C5B67fD6eE53B1d2cd183bAE7dDdb",
+                "value": "7477664852469040021504"
+              }
+            ]
+          }
+        }
+      ]
     }
   }
 }

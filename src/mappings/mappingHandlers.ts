@@ -7,7 +7,8 @@ async function checkGetDailyClaim(
   timestamp: bigint
 ): Promise<DailyClaimSummary> {
   // Create the ID from the iso date string (e.g. '2023-03-26')
-  const id = new Date(Number(timestamp)).toISOString().substring(0, 10);
+  // Timestamps are in seconds, need to convert to ms
+  const id = new Date(Number(timestamp) * 1000).toISOString().substring(0, 10);
   // Read to see if there is an existing aggregation record
   let dailyClaimSummary = await DailyClaimSummary.get(id);
   if (!dailyClaimSummary) {
