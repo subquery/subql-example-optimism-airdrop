@@ -44,7 +44,6 @@ query {
     nodes {
       blockHeight
       value
-      blockHeight
       blockTimestamp
       account
     }
