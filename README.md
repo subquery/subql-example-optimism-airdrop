@@ -36,23 +36,26 @@ You can observe the three services start, and once all are running (it may take 
 
 ## Query your project
 
-For this project, you can try to query with the following GraphQL code to get a taste of how it works.
+For this project, use the sample GraphQL query below:
 
 ```graphql
 query {
-  claims(first: 5, orderBy: VALUE_DESC) {
+  claims(first: 2, orderBy: VALUE_DESC) {
     nodes {
+      id
       blockHeight
+      transactionHash
       value
+      blockHeight
       blockTimestamp
       account
     }
   }
-  dailyClaimSummaries(first: 5) {
+  dailyClaimSummaries(first: 2) {
     nodes {
       id
       totalClaimed
-      claims(first: 5) {
+      claims(first: 2) {
         totalCount
         nodes {
           id
@@ -65,7 +68,7 @@ query {
 }
 ```
 
-You might get some data like this
+Which will return the following:
 
 ```json
 {
@@ -73,13 +76,17 @@ You might get some data like this
     "claims": {
       "nodes": [
         {
+          "id": "129721",
           "blockHeight": "100322581",
+          "transactionHash": "0xd6f5506614870547c4b1a318e9f238bf1ee5a52ad6bb2d4907fc39112aff6872",
           "value": "7477664852469040021504",
           "blockTimestamp": "1684714980",
           "account": "0x85399353400C5B67fD6eE53B1d2cd183bAE7dDdb"
         },
         {
+          "id": "247333",
           "blockHeight": "100316590",
+          "transactionHash": "0x8b2d0390e87adf0a142341e71ad1120e7a94fd64e99277d0b7b9d9eb00671c6b",
           "value": "1746193727981909180416",
           "blockTimestamp": "1684711341",
           "account": "0xfa4d3CD41555d3A0FafD4A97e9ba91882A2f4755"
@@ -89,20 +96,39 @@ You might get some data like this
     "dailyClaimSummaries": {
       "nodes": [
         {
-          "id": "2023-05-21",
-          "totalClaimed": "9223858580450949201920",
+          "id": "2023-05-23",
+          "totalClaimed": "5331450199315913506816",
           "claims": {
-            "totalCount": 2,
+            "totalCount": 7,
             "nodes": [
               {
-                "id": "247333",
-                "account": "0xfa4d3CD41555d3A0FafD4A97e9ba91882A2f4755",
-                "value": "1746193727981909180416"
+                "id": "170962",
+                "account": "0xBf705a542801f6448BfDFAa0AcC5FF95Ef766180",
+                "value": "271833778900496351232"
               },
               {
-                "id": "129721",
-                "account": "0x85399353400C5B67fD6eE53B1d2cd183bAE7dDdb",
-                "value": "7477664852469040021504"
+                "id": "208958",
+                "account": "0xabD77aF5e15bDA1facE840ba94Fa694Fb96D71fd",
+                "value": "271833778900496351232"
+              }
+            ]
+          }
+        },
+        {
+          "id": "2023-05-22",
+          "totalClaimed": "14329148973165485490176",
+          "claims": {
+            "totalCount": 11,
+            "nodes": [
+              {
+                "id": "89049",
+                "account": "0x5CAfbD5aE3EBEEfEAE0a1ef6ef21177df4e961a4",
+                "value": "271833778900496351232"
+              },
+              {
+                "id": "200636",
+                "account": "0xFFFA0D98238609d1b96f6dc875cCCf9220631Ac1",
+                "value": "776867362080440975360"
               }
             ]
           }
